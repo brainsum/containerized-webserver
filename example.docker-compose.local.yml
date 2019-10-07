@@ -1,0 +1,33 @@
+# Local overrides.
+version: "3.7"
+
+services:
+  proxy:
+    ports:
+      - "4080:80"
+      - "4443:443"
+    configs:
+      - source: proxy-my-site-config
+        target: '/etc/nginx/sites-enabled/my-site.nginx.conf'
+        mode: 0644
+    secrets:
+      - source: proxy-my-site-cert
+        target: '/secrets/certs/my-site.pub'
+        mode: 0644
+      - source: proxy-my-site-key
+        target: '/secrets/certs/my-site.key'
+        mode: 0644
+
+configs:
+  proxy-my-site-config:
+    # PROXY_MY_SITE_CONFIG_VERSION=$(md5sum config/my-site.nginx.conf | tr ' ' '\n' | head -1)
+    file: ./config/site.nginx.conf
+    name: proxy-my-site-config-${PROXY_MY_SITE_CONFIG_VERSION:-asd}
+
+secrets:
+  proxy-my-site-cert:
+    file: ./secret/my-site.pub
+    name: proxy-my-site-cert-${PROXY_MY_SITE_CERT:-asd}
+  proxy-my-site-key:
+    file: ./secret/my-site.key
+    name: proxy-my-site-key-${PROXY_MY_SITE_KEY:-asd}

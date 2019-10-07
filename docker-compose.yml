@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  proxy:
+    image: brainsum/general-nginx-proxy:0.2.1
+    init: true
+    configs:
+      - source: proxy-dhparam
+        target: '/etc/nginx/ssl/dhparam.pem'
+        mode: 0644
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: vip
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 15s
+      rollback_config:
+        monitor: 1m
+        parallelism: 2
+      update_config:
+        monitor: 1m
+        parallelism: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 200M
+        reservations:
+          cpus: '0.1'
+          memory: 50M
+
+configs:
+  proxy-dhparam:
+    # PROXY_DHPARAM_VERSION=$(md5sum config/dhparam.pem | tr ' ' '\n' | head -1)
+    file: ./config/dhparam.pem
+    name: proxy-dhparam-${PROXY_DHPARAM_VERSION:-194116414e8e034369b25371d8404046}

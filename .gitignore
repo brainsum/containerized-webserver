@@ -1,0 +1,6 @@
+/config/
+/secret/
+tmp/
+.idea/
+
+docker-compose.local.yml
