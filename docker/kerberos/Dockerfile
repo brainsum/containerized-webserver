@@ -1,6 +1,6 @@
 ARG BASE_IMAGE_TAG
 
-FROM brainsum/general-nginx-proxy:${BASE_IMAGE_TAG}
+FROM brainsum/containerized-webserver:${BASE_IMAGE_TAG}
 
 # From: https://github.com/fclmman/alpine-nginx-spnego/blob/master/Dockerfile
 # See: https://github.com/stnoonan/spnego-http-auth-nginx-module

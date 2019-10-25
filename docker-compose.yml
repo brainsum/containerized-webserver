@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   proxy:
-    image: brainsum/general-nginx-proxy:0.3.2
+    image: brainsum/containerized-webserver:0.3.3
     init: true
     configs:
       - source: proxy-dhparam
