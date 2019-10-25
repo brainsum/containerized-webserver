@@ -12,4 +12,4 @@ services:
       dockerfile: ./Dockerfile
       context: ./docker/kerberos
       args:
-        BASE_IMAGE_TAG: 0.2.2
+        BASE_IMAGE_TAG: 0.3.0
