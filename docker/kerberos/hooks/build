@@ -2,7 +2,4 @@
 
 # @see: https://docs.docker.com/docker-hub/builds/advanced/#custom-build-phase-hooks
 
-echo "Using base image tag: ${BASE_IMAGE_TAG}"
-echo "Build tag: ${DOCKER_TAG}"
-
-docker build --build-arg BASE_IMAGE_TAG=$BASE_IMAGE_TAG -t $IMAGE_NAME .
+docker build --build-arg BASE_IMAGE_TAG=${DOCKER_TAG} -t $IMAGE_NAME .
