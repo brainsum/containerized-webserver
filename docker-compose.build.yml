@@ -4,4 +4,12 @@ services:
   proxy:
     build:
       dockerfile: ./Dockerfile
-      context: ./docker
+      context: ./docker/base
+
+  proxy-with-krb:
+    image: brainsum/general-nginx-proxy:0.3.0-kerberos
+    build:
+      dockerfile: ./Dockerfile
+      context: ./docker/kerberos
+      args:
+        BASE_IMAGE_TAG: 0.2.2
