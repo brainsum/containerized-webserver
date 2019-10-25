@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# @see: https://docs.docker.com/docker-hub/builds/advanced/#custom-build-phase-hooks
+
+docker build --build-arg BASE_IMAGE_TAG=$BASE_IMAGE_TAG -t $IMAGE_NAME .
