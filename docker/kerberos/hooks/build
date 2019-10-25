@@ -2,4 +2,12 @@
 
 # @see: https://docs.docker.com/docker-hub/builds/advanced/#custom-build-phase-hooks
 
-docker build --build-arg BASE_IMAGE_TAG=${DOCKER_TAG} -t $IMAGE_NAME .
+# The base tag should be latest or the tag.
+
+if [[ ${SOURCE_BRANCH} =~ ^[0-9.]+$ ]]; then
+    baseTag=${SOURCE_BRANCH}
+else
+    baseTag=latest
+fi;
+
+docker build --build-arg BASE_IMAGE_TAG=${SOURCE_BRANCH} -t $IMAGE_NAME .
